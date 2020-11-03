@@ -1,0 +1,14 @@
+n = readInput();
+size = (n * 2) + 1;
+board = new board[size];
+function dfs(board, zeroState) {
+    if isGoalState(board, zeroState)
+        return TRUE;
+    for move in moves(board, zeroState) {
+        if dfs(move.board, move.zeroState) {
+            print(move.board);
+            return TRUE;
+        }
+    }
+    return FALSE;
+}

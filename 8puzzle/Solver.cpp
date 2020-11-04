@@ -105,15 +105,13 @@ Board *Solver::init(std::ifstream &input)
 Solver::Solver(std::ifstream &input)
 {
     Board *initial = init(input);
-    // MinPQ<State *> pq;
-    // pq.insert(lastState);
     lastState = new State(initial, 0, nullptr);
     int threshold = lastState->getBoard()->manhattan();
     int algorithm_result;
 
     do
     {
-        algorithm_result = dfs(lastState, 0, threshold);
+        algorithm_result = iterativeDfs(lastState, threshold);
 
         if (algorithm_result == 0)
         {
@@ -125,6 +123,44 @@ Solver::Solver(std::ifstream &input)
     } while (threshold != INT32_MAX);
 }
 
+int Solver::iterativeDfs(State *state, int threshold)
+{
+    std::stack<State *> st;
+    st.push(state);
+
+    State *s;
+    int estimatedCost;
+    int minimumCost = INT32_MAX;
+    while (!st.empty())
+    {
+        s = st.top();
+        st.pop();
+        estimatedCost = s->getBoard()->manhattan() + s->getNumberOfMoves();
+        if (estimatedCost > threshold)
+        {
+            if (estimatedCost < minimumCost)
+            {
+                minimumCost = estimatedCost;
+            }
+            continue;
+        }
+        if (s->getBoard()->isGoal())
+        {
+            lastState = s;
+            return 0;
+        }
+        for (Board *successor : s->getBoard()->getNeighbors())
+        {
+            if (s->getPrevState() == nullptr || !(*successor == *s->getPrevState()->getBoard()))
+            {
+                st.push(new State(successor, s->getNumberOfMoves() + 1, s));
+            }
+        }
+    }
+    return minimumCost;
+}
+
+// here current cost is nomber of moves
 int Solver::dfs(State *state, int currentCost, int threshold)
 {
     int estimatedCost = state->getBoard()->manhattan() + currentCost;
@@ -167,6 +203,7 @@ void Solver::printSolution()
     }
     while (!sol.empty())
     {
+        std::cout << sol.top()->getBoard()->getMove() << "\n";
         std::cout << sol.top()->getBoard()->toString() << "\n";
         sol.pop();
     }

@@ -4,7 +4,7 @@
 
 Board *Board::goalBoard = nullptr;
 
-Board::Board(int **board, int n) : board(board), n(n)
+Board::Board(int **board, int n, MOVE mv) : board(board), n(n), moveFromLastState(mv)
 {
 }
 
@@ -95,13 +95,13 @@ std::vector<Board *> Board::getNeighbors()
         int spaceRow = spaceLocation.first, spaceCol = spaceLocation.second;
 
         if (spaceRow > 0)
-            neighbours.push_back(new Board(swap(spaceRow, spaceCol, spaceRow - 1, spaceCol), n));
+            neighbours.push_back(new Board(swap(spaceRow, spaceCol, spaceRow - 1, spaceCol), n, MOVE::UP));
         if (spaceRow < size() - 1)
-            neighbours.push_back(new Board(swap(spaceRow, spaceCol, spaceRow + 1, spaceCol), n));
+            neighbours.push_back(new Board(swap(spaceRow, spaceCol, spaceRow + 1, spaceCol), n, MOVE::DOWN));
         if (spaceCol > 0)
-            neighbours.push_back(new Board(swap(spaceRow, spaceCol, spaceRow, spaceCol - 1), n));
+            neighbours.push_back(new Board(swap(spaceRow, spaceCol, spaceRow, spaceCol - 1), n, MOVE::LEFT));
         if (spaceCol < size() - 1)
-            neighbours.push_back(new Board(swap(spaceRow, spaceCol, spaceRow, spaceCol + 1), n));
+            neighbours.push_back(new Board(swap(spaceRow, spaceCol, spaceRow, spaceCol + 1), n, MOVE::RIGHT));
     }
 
     return neighbours;
@@ -115,6 +115,29 @@ int **Board::swap(int row1, int col1, int row2, int col2)
     copy[row2][col2] = tmp;
 
     return copy;
+}
+
+std::string Board::getMove()
+{
+    std::string result;
+    switch (moveFromLastState)
+    {
+    case UP:
+        return "UP";
+
+    case DOWN:
+        return "DOWN";
+
+    case RIGHT:
+        return "RIGHT";
+
+    case LEFT:
+        return "LEFT";
+
+    default:
+        break;
+    }
+    return "";
 }
 
 int **Board::copy()

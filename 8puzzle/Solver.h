@@ -2,7 +2,6 @@
 #define SOLVER
 #include "Board.cpp"
 #include <fstream>
-#include "minPQ/MinPQ.cpp"
 #include <stack>
 
 class Solver
@@ -12,6 +11,7 @@ private:
     Board *init(std::ifstream &);
     State *lastState;
     int dfs(State *, int, int);
+    int iterativeDfs(State *, int);
     void initGoalBoard(int, int);
 
 public:

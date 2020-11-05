@@ -172,6 +172,13 @@ Board *Board::twin()
 }
 
 // Board();
-Board::~Board() {}
+Board::~Board()
+{
+    for (int i = 0; i < n; i++)
+    {
+        delete[] board[i];
+    }
+    delete[] board;
+}
 
 #endif

@@ -15,7 +15,6 @@ private:
     void initGoalBoard(int, int);
 
 public:
-    // Solver(const Board &initial);
     Solver(std::ifstream &); // find a solution to the initial board (using the IDA* algorithm)
     int moves();             // min number of moves to solve initial board
     std::stack<Board *> solution();

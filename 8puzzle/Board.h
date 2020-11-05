@@ -37,7 +37,6 @@ public:
     Board *twin();
     static Board *goalBoard;
     std::string getMove();
-    // Board();
     ~Board();
 };
 

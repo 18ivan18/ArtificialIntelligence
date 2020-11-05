@@ -47,6 +47,11 @@ public:
     {
         return !(*this > other);
     }
+    ~State()
+    {
+        delete board;
+        delete prevState;
+    }
 };
 
 void Solver::initGoalBoard(int n, int positionOfZeroInGoal)
@@ -106,20 +111,28 @@ Solver::Solver(std::ifstream &input)
 {
     Board *initial = init(input);
     lastState = new State(initial, 0, nullptr);
+    State *twin = new State(initial->twin(), 0, nullptr);
     int threshold = lastState->getBoard()->manhattan();
-    int algorithm_result;
+    int algorithmResult, checkIfItsUnsolvable;
 
     do
     {
-        algorithm_result = iterativeDfs(lastState, threshold);
+        algorithmResult = iterativeDfs(lastState, threshold);
+        checkIfItsUnsolvable = iterativeDfs(twin, threshold);
 
-        if (algorithm_result == 0)
+        if (algorithmResult == 0)
         {
             break;
         }
 
+        if (checkIfItsUnsolvable == 0)
+        {
+            lastState = nullptr;
+            break;
+        }
+
         // set new threshold
-        threshold = algorithm_result;
+        threshold = algorithmResult;
     } while (threshold != INT32_MAX);
 }
 
@@ -194,6 +207,11 @@ int Solver::dfs(State *state, int currentCost, int threshold)
 
 void Solver::printSolution()
 {
+    if (!lastState)
+    {
+        std::cerr << "Unsolvable\n";
+        return;
+    }
     State *temp = lastState;
     std::stack<State *> sol;
     while (lastState->getPrevState())
@@ -211,14 +229,14 @@ void Solver::printSolution()
 
 int Solver::moves()
 {
-    return lastState != nullptr ? lastState->getNumberOfMoves() : 0;
+    return lastState != nullptr ? lastState->getNumberOfMoves() : -1;
 }
 
 std::stack<Board *> Solver::solution()
 {
     State *temp = lastState;
     std::stack<Board *> sol;
-    while (lastState->getPrevState())
+    while (lastState && lastState->getPrevState())
     {
         sol.push(lastState->getBoard());
         lastState = lastState->getPrevState();
@@ -228,6 +246,7 @@ std::stack<Board *> Solver::solution()
 
 Solver::~Solver()
 {
+    delete lastState;
 }
 
 #endif

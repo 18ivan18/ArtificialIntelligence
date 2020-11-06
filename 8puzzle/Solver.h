@@ -10,7 +10,7 @@ private:
     class State;
     Board *init(std::ifstream &);
     State *lastState;
-    int dfs(State *, int, int);
+    // int dfs(State *, int, int);
     int iterativeDfs(State *, int);
     void initGoalBoard(int, int);
 

@@ -174,36 +174,36 @@ int Solver::iterativeDfs(State *state, int threshold)
 }
 
 // here current cost is nomber of moves
-int Solver::dfs(State *state, int currentCost, int threshold)
-{
-    int estimatedCost = state->getBoard()->manhattan() + currentCost;
+// int Solver::dfs(State *state, int currentCost, int threshold)
+// {
+//     int estimatedCost = state->getBoard()->manhattan() + currentCost;
 
-    if (estimatedCost > threshold)
-    {
-        return estimatedCost;
-    }
+//     if (estimatedCost > threshold)
+//     {
+//         return estimatedCost;
+//     }
 
-    if (state->getBoard()->isGoal())
-    {
-        lastState = state;
-        return 0;
-    }
+//     if (state->getBoard()->isGoal())
+//     {
+//         lastState = state;
+//         return 0;
+//     }
 
-    int minimumCost = INT32_MAX;
-    for (Board *successor : state->getBoard()->getNeighbors())
-    {
-        int successorIda = dfs(new State(successor, state->getNumberOfMoves() + 1, state), currentCost + 1, threshold);
-        if (successorIda == 0)
-        {
-            return 0; // goal is found
-        }
-        if (successorIda < minimumCost)
-        {
-            minimumCost = successorIda;
-        }
-    }
-    return minimumCost;
-}
+//     int minimumCost = INT32_MAX;
+//     for (Board *successor : state->getBoard()->getNeighbors())
+//     {
+//         int successorIda = dfs(new State(successor, state->getNumberOfMoves() + 1, state), currentCost + 1, threshold);
+//         if (successorIda == 0)
+//         {
+//             return 0; // goal is found
+//         }
+//         if (successorIda < minimumCost)
+//         {
+//             minimumCost = successorIda;
+//         }
+//     }
+//     return minimumCost;
+// }
 
 void Solver::printSolution()
 {

@@ -22,10 +22,7 @@ std::string Board::toString()
 
     return result;
 }
-int Board::tileAt(int row, int col)
-{
-    return board[row][col];
-}
+
 int Board::size()
 {
     return n;
@@ -171,7 +168,6 @@ Board *Board::twin()
     return nullptr;
 }
 
-// Board();
 Board::~Board()
 {
     for (int i = 0; i < n; i++)

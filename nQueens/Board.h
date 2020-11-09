@@ -1,6 +1,7 @@
 #ifndef BOARD
 #define BOARD
 #include <vector>
+#include <string>
 
 class Board
 {
@@ -20,6 +21,9 @@ private:
     int getRowWithMinConf(int);
     void updateStats(int, int);
     bool isSolved();
+    void randomShuffle(int *, int, int (*f)(int));
+    template <typename T>
+    void swap(T &, T &);
 
 public:
     Board(int);

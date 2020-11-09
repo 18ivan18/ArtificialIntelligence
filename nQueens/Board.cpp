@@ -3,6 +3,7 @@
 #include <time.h>   /* time */
 #include <cmath>
 #include <iostream>
+#include <algorithm>
 
 Board::Board(int n)
 {
@@ -15,6 +16,22 @@ Board::Board(int n)
     shuffle();
 }
 
+template <typename T>
+void Board::swap(T &first, T &second)
+{
+    T temp = first;
+    first = second;
+    second = temp;
+}
+
+void Board::randomShuffle(int *arr, int n, int (*gen)(int))
+{
+    for (int i = n - 1; i > 0; --i)
+    {
+        swap(arr[i], arr[gen(i + 1)]);
+    }
+}
+
 // Randomly fills the board with one queen in each column. Optimizes on the first iteration
 void Board::shuffle()
 {
@@ -25,13 +42,16 @@ void Board::shuffle()
 
         if (i < n)
         {
+            // q[i] = i;
             queensInRow[i] = 0;
         }
     }
+    // randomShuffle(q, n, [](int i) -> int { return std::rand() % i; });
 
     for (int i = 0; i < n; i++)
     {
         q[i] = rand() % n; // rand int between 0 and n
+        // q[i] = getRowWithMinConf(i);
         queensInRow[q[i]] += 1;
         addToMainDiagonal(q[i], i, 1);
         addToSecondaryDiagonal(q[i], i, 1);
@@ -71,7 +91,7 @@ int Board::numberOfConflicts(int row, int col)
     }
 
     int mainDiagonalIndex;
-    if (col <= row)
+    if (row <= col)
     {
         mainDiagonalIndex = (n - 1) - abs(row - col);
     }
@@ -89,6 +109,7 @@ void Board::solve()
 {
     int moves = 0;
     int col, row;
+    // std::cout << toString() << "\n";
     while (true)
     {
         col = getColWithQueenWithMaxConf();
@@ -134,7 +155,6 @@ void Board::updateStats(int worstQueenColumn, int rowWithMinConfl)
 int Board::getRowWithMinConf(int col)
 {
     candidates.clear();
-    // Move her to the place with the least conflicts.
     int minNumberOfConflicts = n;
     for (int i = 0; i < n; i++)
     {
@@ -229,8 +249,8 @@ void Board::printSolution()
 
 Board::~Board()
 {
-    delete q;
-    delete queensInRow;
-    delete queensInSecondaryDiags;
-    delete queensInMainDiags;
+    delete[] q;
+    delete[] queensInRow;
+    delete[] queensInSecondaryDiags;
+    delete[] queensInMainDiags;
 }

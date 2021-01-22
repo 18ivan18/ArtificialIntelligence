@@ -1,0 +1,78 @@
+:root {
+  --length: 800px;
+  --square-size: 100px;
+}
+
+ol {
+  list-style: none;
+  padding-inline-start: 0;
+}
+
+button {
+  display: inline-block;
+  padding: 0.3em 1.2em;
+  margin: 0 0.3em 0.3em 0;
+  border-radius: 2em;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  color: #ffffff;
+  background-color: #809f39;
+  text-align: center;
+  transition: all 0.2s;
+  border-color: transparent;
+}
+
+button:hover {
+  /* background-color: #4095c6; */
+  filter: brightness(1.2);
+}
+@media all and (max-width: 30em) {
+  button {
+    display: block;
+    margin: 0.2em auto;
+  }
+}
+
+.square {
+  background: gray;
+  height: var(--square-size);
+  width: var(--square-size);
+  padding: 0;
+  text-align: center;
+  border: 3px solid #808080;
+  background-color: #f5f6f6;
+  text-emphasis: center;
+  vertical-align: middle;
+  line-height: var(--square-size);
+  font-weight: bold;
+  font-size: 40px;
+}
+
+.winningSquare {
+  background-color: #a9c3ba;
+}
+
+.row {
+  display: flex;
+}
+
+.App {
+  position: absolute;
+  display: flex;
+  top: 50%;
+  left: 50%;
+  margin-top: calc(-1 * (var(--length) / 2));
+  margin-left: calc(-1 * (var(--length) / 2));
+  height: var(--length);
+  width: var(--length);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.board button {
+  width: 90px;
+  left: calc(50% - 45px);
+  margin-top: 20px;
+  position: relative;
+}

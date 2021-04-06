@@ -6,6 +6,7 @@ import {
   findBestMove,
 } from "./minimax_alpha_beta_pruning/minimax";
 import "./App.css";
+import { PWAprompt } from "./pwa/PWAprompt";
 
 const App = () => {
   const initialize = () => {
@@ -115,6 +116,7 @@ const App = () => {
 
   return (
     <div className="App">
+      <PWAprompt />
       <Board
         board={getCurrent()}
         reset={() => reset()}

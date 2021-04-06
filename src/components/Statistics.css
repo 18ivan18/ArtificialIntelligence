@@ -1,0 +1,26 @@
+.statistics {
+  margin-left: 100px;
+}
+
+  
+@media all and (max-width: 30em) {
+  .statistics {
+    margin-left: 0;
+  }
+}
+
+.stats {
+  width: 100px;
+  margin-top: 8px;
+  position: relative;
+  left: calc(50% - 50px);
+  text-align: center;
+}
+
+.active {
+  font-weight: bold;
+}
+
+.normal {
+  font-weight: normal;
+}

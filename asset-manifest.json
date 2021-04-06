@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/ArtificialIntelligence/static/css/main.e2484642.chunk.css",
+    "main.js": "/ArtificialIntelligence/static/js/main.314755ae.chunk.js",
+    "main.js.map": "/ArtificialIntelligence/static/js/main.314755ae.chunk.js.map",
+    "runtime-main.js": "/ArtificialIntelligence/static/js/runtime-main.e9266740.js",
+    "runtime-main.js.map": "/ArtificialIntelligence/static/js/runtime-main.e9266740.js.map",
+    "static/js/2.d9c45e9f.chunk.js": "/ArtificialIntelligence/static/js/2.d9c45e9f.chunk.js",
+    "static/js/2.d9c45e9f.chunk.js.map": "/ArtificialIntelligence/static/js/2.d9c45e9f.chunk.js.map",
+    "static/js/3.4c846704.chunk.js": "/ArtificialIntelligence/static/js/3.4c846704.chunk.js",
+    "static/js/3.4c846704.chunk.js.map": "/ArtificialIntelligence/static/js/3.4c846704.chunk.js.map",
+    "index.html": "/ArtificialIntelligence/index.html",
+    "static/css/main.e2484642.chunk.css.map": "/ArtificialIntelligence/static/css/main.e2484642.chunk.css.map",
+    "static/js/2.d9c45e9f.chunk.js.LICENSE.txt": "/ArtificialIntelligence/static/js/2.d9c45e9f.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.e9266740.js",
+    "static/js/2.d9c45e9f.chunk.js",
+    "static/css/main.e2484642.chunk.css",
+    "static/js/main.314755ae.chunk.js"
+  ]
+}
